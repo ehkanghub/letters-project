@@ -42,6 +42,12 @@
     .key.active {
       background-color: #222;
     }
+
+    /* 특별한 키 크기 조정 */
+    .key.shift { width: 80px; }
+    .key.space { width: 350px; }
+    .key.bracket, .key.semicolon, .key.quote, 
+    .key.comma, .key.dot, .key.slash { width: 50px; }
   </style>
 </head>
 <body>
@@ -50,13 +56,14 @@
     <div class="row" id="row1"></div>
     <div class="row" id="row2"></div>
     <div class="row" id="row3"></div>
+    <div class="row" id="row4"></div>
   </div>
 
   <script>
     const rows = {
-      row1: "qwertyuiop",
-      row2: "asdfghjkl",
-      row3: "zxcvbnm"
+      row1: "qwertyuiop[]",
+      row2: "asdfghjkl;'",
+      row3: "zxcvbnm,./",
     };
 
     // 키보드 생성
@@ -70,19 +77,31 @@
       }
     }
 
-    // 눌림 효과
+    // Shift와 Spacebar 추가
+    const row4 = document.getElementById("row4");
+    const shift = document.createElement("div");
+    shift.classList.add("key", "shift");
+    shift.dataset.key = "shift";
+    row4.appendChild(shift);
+
+    const space = document.createElement("div");
+    space.classList.add("key", "space");
+    space.dataset.key = " ";
+    row4.appendChild(space);
+
+    // 키 눌림 효과
     document.addEventListener("keydown", (e) => {
-      const key = document.querySelector(`.key[data-key='${e.key.toLowerCase()}']`);
-      if (key) {
-        key.classList.add("active");
-      }
+      let keyPressed = e.key.toLowerCase();
+      if (keyPressed === "shift") keyPressed = "shift";
+      const key = document.querySelector(`.key[data-key='${keyPressed}']`);
+      if (key) key.classList.add("active");
     });
 
     document.addEventListener("keyup", (e) => {
-      const key = document.querySelector(`.key[data-key='${e.key.toLowerCase()}']`);
-      if (key) {
-        key.classList.remove("active");
-      }
+      let keyPressed = e.key.toLowerCase();
+      if (keyPressed === "shift") keyPressed = "shift";
+      const key = document.querySelector(`.key[data-key='${keyPressed}']`);
+      if (key) key.classList.remove("active");
     });
   </script>
 </body>
