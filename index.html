@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weird Typing Keyboard</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    .keyboard {
+      position: fixed;
+      bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .key {
+      width: 50px;
+      height: 50px;
+      background-color: #444;
+      border-radius: 6px;
+      transition: background-color 0.1s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .key.active {
+      background-color: #222;
+    }
+  </style>
+</head>
+<body>
+  <h1>Typing Practice (with Invisible Keys)</h1>
+  <div class="keyboard">
+    <div class="row" id="row1"></div>
+    <div class="row" id="row2"></div>
+    <div class="row" id="row3"></div>
+  </div>
+
+  <script>
+    const rows = {
+      row1: "qwertyuiop",
+      row2: "asdfghjkl",
+      row3: "zxcvbnm"
+    };
+
+    // 키보드 생성
+    for (let row in rows) {
+      const container = document.getElementById(row);
+      for (let ch of rows[row]) {
+        const key = document.createElement("div");
+        key.classList.add("key");
+        key.dataset.key = ch;
+        container.appendChild(key);
+      }
+    }
+
+    // 눌림 효과
+    document.addEventListener("keydown", (e) => {
+      const key = document.querySelector(`.key[data-key='${e.key.toLowerCase()}']`);
+      if (key) {
+        key.classList.add("active");
+      }
+    });
+
+    document.addEventListener("keyup", (e) => {
+      const key = document.querySelector(`.key[data-key='${e.key.toLowerCase()}']`);
+      if (key) {
+        key.classList.remove("active");
+      }
+    });
+  </script>
+</body>
+</html>
