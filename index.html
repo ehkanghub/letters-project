@@ -42,8 +42,6 @@
     .key.active {
       background-color: #222;
     }
-
-    /* 특별한 키 크기 조정 */
     .key.shift { width: 80px; }
     .key.space { width: 350px; }
     .key.bracket, .key.semicolon, .key.quote, 
@@ -66,7 +64,7 @@
       row3: "zxcvbnm,./",
     };
 
-    // 키보드 생성
+    // 키보드
     for (let row in rows) {
       const container = document.getElementById(row);
       for (let ch of rows[row]) {
@@ -76,8 +74,6 @@
         container.appendChild(key);
       }
     }
-
-    // Shift와 Spacebar 추가
     const row4 = document.getElementById("row4");
     const shift = document.createElement("div");
     shift.classList.add("key", "shift");
@@ -89,7 +85,7 @@
     space.dataset.key = " ";
     row4.appendChild(space);
 
-    // 키 눌림 효과
+    // 키 누르면
     document.addEventListener("keydown", (e) => {
       let keyPressed = e.key.toLowerCase();
       if (keyPressed === "shift") keyPressed = "shift";
