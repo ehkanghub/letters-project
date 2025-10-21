@@ -27,7 +27,14 @@
       align-items: center;
       gap: 8px;
     }
-
+    #row1 {
+      position: relative;
+      left: 10px;
+    }
+    #row3 {
+      position: relative;
+      right: 50px;
+    }
     .row {
       display: flex;
       gap: 8px;
@@ -45,7 +52,7 @@
     .key.active {
       background-color: salmon;
     }
-    .key.shift { width: 80px; }
+    .key.shift { width: 100px; }
     .key.space { width: 350px; }
     .key.bracket, .key.semicolon, .key.quote, 
     .key.comma, .key.dot, .key.slash { width: 50px; }
@@ -66,7 +73,11 @@
       row2: "asdfghjkl;'",
       row3: "zxcvbnm,./",
     };
-
+    const row3 = document.getElementById("row3");
+    const shift = document.createElement("div");
+    shift.classList.add("key", "shift");
+    shift.dataset.key = "shift";
+    row3.appendChild(shift);
     // 키보드
     for (let row in rows) {
       const container = document.getElementById(row);
@@ -77,11 +88,6 @@
         container.appendChild(key);
       }
     }
-    const row3 = document.getElementById("row3");
-    const shift = document.createElement("div");
-    shift.classList.add("key", "shift");
-    shift.dataset.key = "shift";
-    row3.appendChild(shift);
 
     const space = document.createElement("div");
     space.classList.add("key", "space");
@@ -102,6 +108,7 @@
       const key = document.querySelector(`.key[data-key='${keyPressed}']`);
       if (key) key.classList.remove("active");
     });
+    const words = document.container()
   </script>
 </body>
 </html>
